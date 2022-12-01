@@ -1,24 +1,19 @@
-import React from "react";
-import { userContext, channelContext } from "../App";
+import React, { useContext } from "react";
+import { CountContext } from "../App";
 
 function CompF() {
+  const countContext = useContext(CountContext);
+
   return (
     <div>
-      <userContext.Consumer>
-        {(user) => {
-          return (
-            <channelContext.Consumer>
-              {(channel) => {
-                return (
-                  <div>
-                    user context value {user}, channel context value {channel}
-                  </div>
-                );
-              }}
-            </channelContext.Consumer>
-          );
-        }}
-      </userContext.Consumer>
+      CompF {countContext.countSate}
+      <button onClick={() => countContext.countDispatch("increment")}>
+        Increment
+      </button>
+      <button onClick={() => countContext.countDispatch("decrement")}>
+        Decrement
+      </button>
+      <button onClick={() => countContext.countDispatch("reset")}>Reset</button>
     </div>
   );
 }
